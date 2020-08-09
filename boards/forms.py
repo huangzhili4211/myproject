@@ -1,5 +1,5 @@
 from django import forms
-from .models import Topic, Board, Usermodel
+from .models import Topic, Board, Usermodel, Blog
 
 
 class NewTopicForm(forms.ModelForm):
@@ -14,6 +14,16 @@ class NewTopicForm(forms.ModelForm):
         fields = ['subject', 'message']
 
 
+class NewBlogForm(forms.ModelForm):
+    message = forms.CharField(
+        widget=forms.Textarea(),
+        max_length=30,
+        help_text='The max length of the text is 4000.'
+    )
+
+    class Meta:
+        model = Blog 
+        fields = ['subject', 'message']
 
 class Userform(forms.ModelForm):
 

@@ -30,6 +30,8 @@ def return_static(request, path, insecure=True, **kwargs):
 urlpatterns = [
     re_path(r'^static/(?P<path>.*)$', return_static, name='static'),
     url(r'^$',views.home,name='home'),
+    url(r'^blog/new$',views.createblog,name='createblog'),
+    url(r'^blog/$',views.bloglist,name='bloglist'),
     url(r'^signup/$',accounts_views.signup,name='signup'),
     url(r'^login/$',auth_views.LoginView.as_view(template_name='login.html'),name='login'),
     url(r'^logout/$',auth_views.LogoutView.as_view(),name='logout'),

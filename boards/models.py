@@ -25,6 +25,12 @@ class Topic(models.Model):
     def __str__(self):
         return self.subject
 
+class Blog(models.Model):
+    subject = models.CharField(max_length=255)
+    last_updated = models.DateTimeField(auto_now_add=True)
+    starter = models.ForeignKey(User,on_delete=models.CASCADE)
+    views = models.PositiveIntegerField(default=0)
+
 class Post(models.Model):
     message = models.TextField(max_length=4000)
     topic = models.ForeignKey(Topic, related_name='posts',on_delete=models.CASCADE)

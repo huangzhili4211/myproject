@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{% endblock %}
+
+
+
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+{% endblock %}
+
+{% block content %}
+<div class="mb-4">
+<a href="{% url 'createblog' %}" class="btn btn-primary">New blog</a>
+</div>
+
+<table class="table">
+<thead class="thead-inverse">
+<tr>
+<th>Topic</th>
+<th>Starter</th>
+<th>Replies</th>
+<th>Views</th>
+<th>Last Update</th>
+</tr>
+</thead>
+<tbody>
+{% for blog in blogs %}
+<tr>
+<td><a href="{% url 'bloglist' %}">{{ blog.subject }}</a></td>
+<td>{{ blog.starter.username }}</td>
+<td>{{ blog.views }}</td>  <!-- here -->
+<td>{{ blog.last_updated }}</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+{% endblock %}

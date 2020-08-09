@@ -5,8 +5,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, Http404
 
 from accounts.forms import PostForm
-from .forms import NewTopicForm, Userform
-from .models import Board, Topic, Post, Usermodel
+from .forms import NewTopicForm, Userform, NewBlogForm
+from .models import Board, Topic, Post, Usermodel, Blog
 
 
 # Create your views here.
@@ -20,6 +20,31 @@ def home(request):
 def board_topics(request,pk):
     board = get_object_or_404(Board,pk=pk)
     return render(request,'topics.html',{'board':board})
+
+@login_required
+def createblog(request):
+    user = User.objects.first()  # TODO: get the currently logged in user
+    if request.method == 'POST':
+        form = NewBlogForm(request.POST)
+        boards = Board.objects.all()
+        if form.is_valid():
+            blog = form.save(commit=False)
+            blog.starter = request.user
+            blog.save()
+            post = Post.objects.create(
+                message=form.cleaned_data.get('message'),
+                topic=blog,
+                created_by=request.user
+            )
+            return redirect('bloglist')  # TODO: redirect to the created topic page
+    else:
+        form = NewTopicForm()
+    return render(request,'new_blog.html',{'form':form})
+    
+def bloglist(request):
+    blogs = Blog.objects.all 
+    return render(request, 'blog_list.html')
+    
 
 @login_required
 def new_topic(request,pk):
