@@ -5,8 +5,8 @@ from .models import Topic, Board, Usermodel, Blog
 class NewTopicForm(forms.ModelForm):
     message = forms.CharField(
         widget=forms.Textarea(),
-        max_length=30,
-        help_text='The max length of the text is 4000.'
+        max_length=4000000,
+        help_text='The max length of the text is 4000000.'
     )
 
     class Meta:
