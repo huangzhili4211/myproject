@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
     'boards',
     'widget_tweaks',
     'accounts',
@@ -126,5 +127,15 @@ STATICFILES_DIRS = [
 ]
 LOGOUT_REDIRECT_URL ='home'
 LOGIN_REDIRECT_URL = 'home'
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 LOGIN_URL = 'login'
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.qq.com'
+EMAIL_PORT = 25
+EMAIL_HOST_USER = '2117762625@qq.com'
+#EMAIL_HOST_PASSWORD = 'uinbgtvllpncdcdh' 
+EMAIL_HOST_PASSWORD = 'hzl131211' 
+EMAIL_FROM = 'python<2117762625@qq.com>'
+EMAIL_USE_TLS = True
